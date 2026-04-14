@@ -22,6 +22,8 @@ time.sleep(0.1)
 imu_i2c = busio.I2C(board.IMU_SCL, board.IMU_SDA)
 sensor = LSM6DS3TRC(imu_i2c)
 
+counter = 0
+
 # --- PID  ---
 TARGET_DISTANCE = 10.0  # Distance(cm) from object or wall - target use for PID
 KP = 0.02        # Proportional in PID - percentage of difference between 
@@ -75,14 +77,16 @@ def get_pid_throttle(current_dist):
     return max(..., min(..., ...))
 
 def handle_uart(distance, imu_acceleration, imu_gyro):
+        # on line #25ish --> counter = 0
+        global counter
         counter += 1
         if counter % 50000 == 0:
             if log_distance:
-                msg = f"Distance: {distance:.2f};\n"
+                msg = "Distance: " + str(distance) + ";\n"
                 ua.write(msg)
             if log_imu:
-                msg = f"IMU Acceleration: {imu_acceleration:.2f};\n"
-                msg = f"IMU Gyro: {imu_gyro:.2f};\n"
+                msg = "IMU Acceleration: " + str(imu_acceleration) + ";\n"
+                msg = "IMU Gyro: " + str(imu_gyro) + ";\n"
                 ua.write(msg)
               
         if ua.in_waiting():
@@ -91,12 +95,12 @@ def handle_uart(distance, imu_acceleration, imu_gyro):
                 text = data.decode("utf-8").strip()
                 print("Text Sent: ", text)
                 if text and text == "... WHAT LETTER TO LOG DISTANCE":
-                    log_distance = ...
+                    log_distance = True
                 elif text and text == "... WHAT LETTER TO LOG IMU":
-                    log_imu = ...
+                    log_imu = True
                 elif text and text == "... WHAT LETTER TO STOP LOGGING":
-                    log_distance = ...
-                    log_imu = ...
+                    log_distance = False
+                    log_imu = False
             # ... STUDY ew_uart.py - it provided functions for using buttons instead of sending text
              
 while True:
