@@ -6,7 +6,7 @@ from adafruit_motor import motor
 import ew_distance as ew_dist
 from adafruit_lsm6ds.lsm6ds3trc import LSM6DS3TRC
 import busio
-import digtalio
+import digitalio
 
 # --- BLUETOOTH CONFIG
 
