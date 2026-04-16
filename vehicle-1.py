@@ -85,11 +85,11 @@ def handle_uart(distance, imu_acceleration, imu_gyro):
         counter += 1
         if counter % 50000 == 0:
             if log_distance:
-                msg = "Distance: " + str(distance) + ";\n"
+                msg = "Distance: " + str(distance) + ";\n" # <== FIX
                 ua.write(msg)
             if log_imu:
-                msg = "IMU Acceleration: " + str(imu_acceleration) + ";\n"
-                msg = "IMU Gyro: " + str(imu_gyro) + ";\n"
+                msg = "IMU Acceleration: " + str(imu_acceleration) + ";\n" <== FIX
+                msg = "IMU Gyro: " + str(imu_gyro) + ";\n" <== FIX
                 ua.write(msg)
               
         if ua.in_waiting():
