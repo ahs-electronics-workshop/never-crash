@@ -22,6 +22,7 @@ time.sleep(0.1)
 imu_i2c = busio.I2C(board.IMU_SCL, board.IMU_SDA)
 sensor = LSM6DS3TRC(imu_i2c)
 
+# <== ADD these 
 counter = 0
 log_distance = False
 log_imu = False
