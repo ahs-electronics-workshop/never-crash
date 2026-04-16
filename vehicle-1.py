@@ -83,7 +83,7 @@ def handle_uart(distance, imu_acceleration, imu_gyro):
         # on line #25ish --> counter = 0, log_distance = False, log_imu = False
         global counter, log_distance, log_imu
         counter += 1
-        if counter % 50000 == 0:
+        if counter % 20 == 0:
             if log_distance:
                 msg = "Distance: " + str(distance) + ";\n" # <== FIX
                 ua.write(msg)
