@@ -23,6 +23,8 @@ imu_i2c = busio.I2C(board.IMU_SCL, board.IMU_SDA)
 sensor = LSM6DS3TRC(imu_i2c)
 
 counter = 0
+log_distance = False
+log_imu = False
 
 # --- PID  ---
 TARGET_DISTANCE = 10.0  # Distance(cm) from object or wall - target use for PID
@@ -77,8 +79,8 @@ def get_pid_throttle(current_dist):
     return max(..., min(..., ...))
 
 def handle_uart(distance, imu_acceleration, imu_gyro):
-        # on line #25ish --> counter = 0
-        global counter
+        # on line #25ish --> counter = 0, log_distance = False, log_imu = False
+        global counter, log_distance, log_imu
         counter += 1
         if counter % 50000 == 0:
             if log_distance:
