@@ -26,6 +26,7 @@ sensor = LSM6DS3TRC(imu_i2c)
 counter = 0
 log_distance = False
 log_imu = False
+throttle = -999
 
 # --- PID  ---
 TARGET_DISTANCE = 10.0  # Distance(cm) from object or wall - target use for PID
@@ -79,13 +80,14 @@ def get_pid_throttle(current_dist):
     # IF the speed is less than MIN_SPEED use MIN_SPEED 
     return max(..., min(..., ...))
 
-def handle_uart(distance, imu_acceleration, imu_gyro):
+def handle_uart(distance, imu_acceleration, imu_gyro, throttle):
         # on line #25ish --> counter = 0, log_distance = False, log_imu = False
         global counter, log_distance, log_imu
         counter += 1
         if counter % 20 == 0:
             if log_distance:
                 msg = "Distance: " + str(distance) + ";\n" # <== FIX
+                msg += "Throttle: " + str(throttle) + ";\n" # <== FIX
                 ua.write(msg)
             if log_imu:
                 msg = "IMU Acceleration: " + str(imu_acceleration) + ";\n" # <== FIX
