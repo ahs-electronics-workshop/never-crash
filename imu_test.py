@@ -2,9 +2,10 @@ import time
 import board
 import busio
 from adafruit_lsm6ds.lsm6ds3 import LSM6DS3
-
+from imu_calibration as imuc
 
 #we may need to call the calibration
+#imuc.main()
 
 i2c = busio.I2C(board.IMU_SCL, board.IMU_SDA)
 imu = LSM6DS3(i2c)
