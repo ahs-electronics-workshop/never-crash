@@ -26,7 +26,7 @@ while True:
     dt = now - last_time
     last_time = now
 
-    gyro_z = imu.gyro[2] * (180 / 3.14159)
+    gyro_z = imu.gyro[2] * (180 / 3.14159)   ## WHY THIS MOMENT
 
     if abs(gyro_z) > DEAD_BAND:
         # Turn just started
