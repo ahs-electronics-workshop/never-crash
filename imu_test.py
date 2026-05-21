@@ -2,7 +2,7 @@ import time
 import board
 import busio
 from adafruit_lsm6ds.lsm6ds3 import LSM6DS3
-from imu_calibration as imuc
+import imu_calibration as imuc
 import busio
 import digitalio 
 # --- BLUETOOTH CONFIG
